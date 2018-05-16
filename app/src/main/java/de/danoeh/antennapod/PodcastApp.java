@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.Build;
 import android.os.StrictMode;
 
+import com.appspector.sdk.AppSpector;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
@@ -47,6 +48,8 @@ public class PodcastApp extends Application {
 				builder.detectLeakedRegistrationObjects();
 			}
 			StrictMode.setVmPolicy(builder.build());
+
+			initAppSpector();
 		}
 
 		singleton = this;
@@ -59,5 +62,15 @@ public class PodcastApp extends Application {
 
         SPAUtil.sendSPAppsQueryFeedsIntent(this);
     }
+
+    public void initAppSpector(){
+        AppSpector.build(this)
+                .addPerformanceMonitor()
+                .addHttpMonitor()
+                .addScreenshotMonitor()
+                .addSQLMonitor()
+                .addLogMonitor()
+                .run("NmMwMmYxNDUtNDI3OS00NzczLWE0N2MtZTMzZTU4NjdiMzQ4");
+	}
 
 }

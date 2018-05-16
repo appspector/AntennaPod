@@ -3,9 +3,13 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: "com.android.application"
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.appspector.sdk'
 
 repositories {
     maven { url "https://jitpack.io" }
+    maven {
+        url "https://maven.appspector.com/artifactory/android-sdk"
+    }
     mavenCentral()
 }
 
@@ -176,6 +180,8 @@ dependencies {
     implementation 'com.github.ByteHamster:SearchPreference:v1.0.3'
 
     androidTestImplementation "com.jayway.android.robotium:robotium-solo:$robotiumSoloVersion"
+
+    implementation "com.appspector:android-sdk:$rootProject.ext.appspectorVersion"
 }
 
 play {
