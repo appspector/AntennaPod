@@ -3,19 +3,15 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: "com.android.application"
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.getkeepsafe.dexcount'
-apply plugin: 'com.appspector.sdk'
 
 repositories {
     maven { url "https://jitpack.io" }
-    maven {
-        url appspectorMavenRep
-    }
     mavenCentral()
 }
 
 buildscript {
     repositories {
-        jcenter()
+       jcenter()
     }
     dependencies {
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
@@ -117,27 +113,13 @@ android {
         additionalParameters "--no-version-vectors"
     }
 
-    flavorDimensions "market", "appSpectorDebug"
-
+    flavorDimensions "market"
     productFlavors {
         free {
             dimension "market"
         }
         play {
             dimension "market"
-        }
-
-        appSpector {
-
-            dimension "appSpectorDebug"
-
-            applicationIdSuffix = rootProject.appspectorAppId
-
-            versionCode rootProject.appspectorVersionCode
-            versionName "${getMyVersionName()}-$rootProject.appspectorVersionName"
-
-            buildConfigField "String", "APPSPECTOR_API_KEY", "\"" + (System.getenv('APPSPECTOR_API_KEY')
-                    ?: rootProject.appspectorDefaultApiKey) + "\""
         }
     }
 
@@ -194,8 +176,6 @@ dependencies {
     implementation 'com.github.ByteHamster:SearchPreference:v1.0.3'
 
     androidTestImplementation "com.jayway.android.robotium:robotium-solo:$robotiumSoloVersion"
-
-    implementation "com.appspector:android-sdk:$rootProject.appspectorVersion"
 }
 
 play {
