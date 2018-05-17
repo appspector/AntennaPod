@@ -8,14 +8,14 @@ apply plugin: 'com.appspector.sdk'
 repositories {
     maven { url "https://jitpack.io" }
     maven {
-        url "https://maven.appspector.com/artifactory/android-sdk"
+        url appspectorMavenRep
     }
     mavenCentral()
 }
 
 buildscript {
     repositories {
-       jcenter()
+        jcenter()
     }
     dependencies {
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
@@ -117,13 +117,27 @@ android {
         additionalParameters "--no-version-vectors"
     }
 
-    flavorDimensions "market"
+    flavorDimensions "market", "appSpectorDebug"
+
     productFlavors {
         free {
             dimension "market"
         }
         play {
             dimension "market"
+        }
+
+        appSpector {
+
+            dimension "appSpectorDebug"
+
+            applicationIdSuffix = rootProject.appspectorAppId
+
+            versionCode rootProject.appspectorVersionCode
+            versionName "${getMyVersionName()}-$rootProject.appspectorVersionName"
+
+            buildConfigField "String", "APPSPECTOR_API_KEY", "\"" + (System.getenv('APPSPECTOR_API_KEY')
+                    ?: rootProject.appspectorDefaultApiKey) + "\""
         }
     }
 
@@ -181,7 +195,7 @@ dependencies {
 
     androidTestImplementation "com.jayway.android.robotium:robotium-solo:$robotiumSoloVersion"
 
-    implementation "com.appspector:android-sdk:$rootProject.ext.appspectorVersion"
+    implementation "com.appspector:android-sdk:$rootProject.appspectorVersion"
 }
 
 play {
