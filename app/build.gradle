@@ -154,8 +154,6 @@ dependencies {
     } else {
         System.out.println("app: free build hack, skipping some dependencies")
     }
-    implementation "com.android.support:support-v4:$supportVersion"
-    implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
     implementation "com.android.support:preference-v14:$supportVersion"
     implementation "com.android.support:gridlayout-v7:$supportVersion"
@@ -195,7 +193,7 @@ dependencies {
 
     androidTestImplementation "com.jayway.android.robotium:robotium-solo:$robotiumSoloVersion"
 
-    implementation "com.appspector:android-sdk:$rootProject.appspectorVersion"
+    implementation ("com.appspector:android-sdk:$rootProject.appspectorVersion")
 }
 
 play {

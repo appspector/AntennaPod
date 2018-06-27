@@ -47,7 +47,6 @@ repositories {
 }
 
 dependencies {
-    implementation "com.android.support:support-v4:$supportVersion"
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:preference-v14:$supportVersion"
     implementation "com.android.support:percent:$supportVersion"
